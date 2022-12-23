@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soru 2</title>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .inputContainer {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 10px;
+      }
+
+      button {
+        margin: 0 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <form onsubmit="return formuGonder(event)">
+        <div class="inputContainer">
+          <div>
+            <label for="minimumDeger">Minimum Deger</label><br />
+            <input
+              type="range"
+              id="minimumDeger"
+              name="minimumDeger"
+              min="0"
+              max="100"
+              step="0"
+            />
+          </div>
+          <button type="button" onclick="minimumSec()">Sec</button>
+          <input type="text" id="minimumSayi" disabled />
+        </div>
+  
+        <div class="inputContainer">
+          <div>
+            <label for="maksimumDeger">Maksimum Deger</label><br />
+            <input
+              type="range"
+              id="maksimumDeger"
+              name="maksimumDeger"
+              min="0"
+              max="100"
+              step="0"
+            />
+          </div>
+          <button type="button" onclick="maksimumSec()">Sec</button>
+          <input type="text" id="maksimumSayi" disabled />
+        </div>
+  
+        <input type="submit" value="Üret" />
+        <hr />
+        <p>Rastgele Sayi: <span id="sayi"></span></p>
+      </form>
+    </div>
+    
+    <script>
+      function rastgeleSayi(min, max) {
+        return Math.round(Math.random() * (max - min)) + min;
+      }
+
+      function minimumSec() {
+        const minimumSayi = rastgeleSayi(0, 100);
+        document.getElementById("minimumDeger").value = minimumSayi;
+        document.getElementById("minimumSayi").value = minimumSayi;
+      }
+
+      function maksimumSec() {
+        const minimumSayi = Number(
+          document.getElementById("minimumSayi").value
+        );
+        const maksimumSayi = rastgeleSayi(minimumSayi, 100);
+        document.getElementById("maksimumDeger").value = maksimumSayi;
+        document.getElementById("maksimumSayi").value = maksimumSayi;
+      }
+
+      function formuGonder(e) {
+        e.preventDefault();
+        const minimumSayi = Number(document.getElementById("minimumSayi").value);
+        const maksimumSayi = Number(document.getElementById("maksimumSayi").value);
+        document.getElementById("sayi").innerHTML = rastgeleSayi(minimumSayi,maksimumSayi);
+      }
+    </script>
+  </body>
+</html>
